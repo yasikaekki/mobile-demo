@@ -22,6 +22,7 @@ class _SignInPageState extends State<SignInPage> {
     return WillPopScope(
       onWillPop: () {
         context.bloc<PageBloc>().add(GoToSplashPage());
+
         return;
       },
       child: Scaffold(
@@ -103,45 +104,45 @@ class _SignInPageState extends State<SignInPage> {
                       margin: EdgeInsets.only(top: 40, bottom: 30),
                       child: isSigningIn
                           ? SpinKitFadingCircle(
-                        color: mainColor,
-                      )
+                              color: mainColor,
+                            )
                           : FloatingActionButton(
-                          elevation: 0,
-                          child: Icon(
-                            Icons.arrow_forward,
-                            color: isEmailValid && isPasswordValid
-                                ? Colors.white
-                                : Color(0xFFBEBEBE),
-                          ),
-                          backgroundColor: isEmailValid && isPasswordValid
-                              ? mainColor
-                              : Color(0xFFE4E4E4),
-                          onPressed: isEmailValid && isPasswordValid
-                              ? () async {
-                            setState(() {
-                              isSigningIn = true;
-                            });
+                              elevation: 0,
+                              child: Icon(
+                                Icons.arrow_forward,
+                                color: isEmailValid && isPasswordValid
+                                    ? Colors.white
+                                    : Color(0xFFBEBEBE),
+                              ),
+                              backgroundColor: isEmailValid && isPasswordValid
+                                  ? mainColor
+                                  : Color(0xFFE4E4E4),
+                              onPressed: isEmailValid && isPasswordValid
+                                  ? () async {
+                                      setState(() {
+                                        isSigningIn = true;
+                                      });
 
-                            SignInSignUpResult result =
-                            await AuthServices.signIn(
-                                emailController.text,
-                                passwordController.text);
+                                      SignInSignUpResult result =
+                                          await AuthServices.signIn(
+                                              emailController.text,
+                                              passwordController.text);
 
-                            if (result.user == null) {
-                              setState(() {
-                                isSigningIn = false;
-                              });
+                                      if (result.user == null) {
+                                        setState(() {
+                                          isSigningIn = false;
+                                        });
 
-                              Flushbar(
-                                duration: Duration(seconds: 4),
-                                flushbarPosition:
-                                FlushbarPosition.TOP,
-                                backgroundColor: Color(0xFFFF5C83),
-                                message: result.message,
-                              )..show(context);
-                            }
-                          }
-                              : null),
+                                        Flushbar(
+                                          duration: Duration(seconds: 4),
+                                          flushbarPosition:
+                                              FlushbarPosition.TOP,
+                                          backgroundColor: Color(0xFFFF5C83),
+                                          message: result.message,
+                                        )..show(context);
+                                      }
+                                    }
+                                  : null),
                     ),
                   ),
                   Row(
@@ -149,7 +150,7 @@ class _SignInPageState extends State<SignInPage> {
                       Text(
                         "Start Fresh Now? ",
                         style:
-                        greyTextFont.copyWith(fontWeight: FontWeight.w400),
+                            greyTextFont.copyWith(fontWeight: FontWeight.w400),
                       ),
                       Text(
                         "Sign Up",

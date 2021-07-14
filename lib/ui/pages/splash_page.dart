@@ -15,7 +15,7 @@ class SplashPage extends StatelessWidget {
                 height: 136,
                 decoration: BoxDecoration(
                     image:
-                    DecorationImage(image: AssetImage("assets/logo.png"))),
+                        DecorationImage(image: AssetImage("assets/logo.png"))),
               ),
               Container(
                 margin: EdgeInsets.only(top: 70, bottom: 16),
@@ -40,7 +40,11 @@ class SplashPage extends StatelessWidget {
                       style: whiteTextFont.copyWith(fontSize: 16),
                     ),
                     color: mainColor,
-                    onPressed: () {}),
+                    onPressed: () {
+                      context
+                          .bloc<PageBloc>()
+                          .add(GoToRegistrationPage(RegistrationData()));
+                    }),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
